@@ -60,12 +60,12 @@ class CompositeIdentifier implements IdentifierInterface, \IteratorAggregate
      */
     public function getIdentifier(FormatterInterface $formatter = null, $format = null)
     {
-        if (null === $formatter && null === $this->defaultFormatter) {
-            $this->defaultFormatter = new ImplodeFormatter();
+        if (null !== $formatter) {
+            return $formatter->format($format, $this->identifiers);
         }
 
-        if (null !== $formatter) {
-            $formatter->format($format, $this->identifiers);
+        if (null === $this->defaultFormatter) {
+            $this->defaultFormatter = new ImplodeFormatter();
         }
 
         return $this->defaultFormatter->format($format, $this->identifiers);

@@ -12,12 +12,12 @@ use Symftony\Identifier\UniqidIdentifier;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$identifier = new CompositeIdentifier(
+$identifier = new CompositeIdentifier([
     new HostByNameIdentifier(),
     new PHPSapiNameIdentifier(),
     new PHPVersionIdentifier(),
     new UniqidIdentifier()
-);
+]);
 // create a format
 $format1 = new VsprintfFormatter('%s@%s(php-%s)#%s');
 $format2 = new StrReplaceFormatter('{host_by_name}@{php_sapi_name}(php-{php_version})#{uniqid}');
